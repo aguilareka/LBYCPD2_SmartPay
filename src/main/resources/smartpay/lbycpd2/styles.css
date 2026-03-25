@@ -1,0 +1,53 @@
+.root {
+    -fx-font-family: "Segoe UI", Arial, sans-serif;
+    -fx-background-color: #f4f6f8;
+}
+
+.header {
+    -fx-background-color: white;
+    -fx-padding: 15px;
+    -fx-border-color: #e0e0e0;
+}
+
+.title {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2c3e50;
+}
+
+.card {
+    -fx-background-color: white;
+    -fx-padding: 25px;
+    -fx-background-radius: 12px;
+    -fx-border-radius: 12px;
+    -fx-border-color: #e0e0e0;
+}
+
+.section-title {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.primary-button {
+    -fx-background-color: #1c1c1c;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-background-radius: 8px;
+    -fx-padding: 10 20;
+    -fx-cursor: hand;
+}
+
+.primary-button:hover {
+    -fx-background-color: #333333;
+}
+
+.file-label {
+    -fx-text-fill: #7f8c8d;
+}
+
+.output-area {
+    -fx-control-inner-background: #fafafa;
+    -fx-border-color: #dcdcdc;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+}
