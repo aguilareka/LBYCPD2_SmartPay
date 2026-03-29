@@ -1,8 +1,0 @@
-EmployeeID,Name,Date,Time,Type
-1001,Juan Dela Cruz,2026-02-20,08:00,IN
-1001,Juan Dela Cruz,2026-02-20,17:00,OUT
-1001,Juan Dela Cruz,2026-02-20,18:30,OT-IN
-1001,Juan Dela Cruz,2026-02-20,20:00,OT-OUT
-1002,Maria Santos,2026-02-20,09:00,IN
-1002,Maria Santos,2026-02-20,18:00,OUT
-1003,Carlos Reyes,2026-02-20,08:15,IN
