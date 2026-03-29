@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="CENTER" spacing="15" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smartpay.lbycpd2.controllers.LoginController" styleClass="root">
+    <VBox maxWidth="300" spacing="10" styleClass="card">
+        <Label text="SmartPay Login" styleClass="title"/>
+        <TextField fx:id="usernameField" promptText="Username"/>
+        <PasswordField fx:id="passwordField" promptText="Password"/>
+        <Button text="Login" onAction="#handleLogin" styleClass="primary-button" maxWidth="Infinity"/>
+        <Label fx:id="errorLabel" textFill="red" wrapText="true"/>
+    </VBox>
+</VBox>

@@ -10,7 +10,7 @@ import java.io.IOException;
 public class SmartPayApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(SmartPayApplication.class.getResource("hello-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(SmartPayApplication.class.getResource("login-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
 
         scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());

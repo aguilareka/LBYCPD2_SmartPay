@@ -6,12 +6,19 @@ import smartpay.lbycpd2.models.Payslip;
 public class PayrollCalculator {
 
     public Payslip calculate(Employee emp, String period) {
-        double grossPay = emp.getBaseRate() * emp.getTotalHours();
+        double hourlyRate = emp.getBaseRate();
+
+        double basicPay = hourlyRate * emp.getRegularHours();
+        double otPay = (hourlyRate * 1.25) * emp.getOvertimeHours();
+        double lateDeduction = (hourlyRate / 60.0) * emp.getLateMinutes();
+
+        double grossPay = (basicPay + otPay) - lateDeduction;
+        if (grossPay < 0) grossPay = 0.0;
+
         double sss = calculateSSS(grossPay);
-
         double phic = grossPay * 0.025;
-
         double hdmf = Math.min(grossPay * 0.02, 200.0);
+
         double taxableIncome = grossPay - (sss + phic + hdmf);
         double tax = calculateTax(taxableIncome);
         double netPay = grossPay - (sss + phic + hdmf + tax);

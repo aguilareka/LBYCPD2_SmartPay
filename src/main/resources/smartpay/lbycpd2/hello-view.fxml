@@ -1,36 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
-
-<BorderPane xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smartpay.lbycpd2.controllers.CSVController">
-
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smartpay.lbycpd2.controllers.CSVController">
     <top>
-        <HBox styleClass="header">
-            <Label styleClass="title" text="SmartPay: Automated Payroll and Attendance Solution" />
+        <HBox styleClass="header" spacing="20">
+            <Label styleClass="title" text="SmartPay: Admin Dashboard" />
+            <Region HBox.hgrow="ALWAYS" />
+            <Button text="Logout" onAction="#handleLogout" styleClass="primary-button" />
         </HBox>
     </top>
 
     <center>
         <StackPane>
-            <VBox maxWidth="600" spacing="15" styleClass="card">
+            <VBox maxWidth="800" spacing="15" styleClass="card">
 
-                <Label styleClass="section-title" text="Employee Time Log Validator" />
-                <Button onAction="#handleUpload" styleClass="primary-button" text="Choose CSV File" />
-
-                <Button onAction="#handleGeneratePayroll" styleClass="primary-button" text="Generate Payroll CSVs" />
+                <Label styleClass="section-title" text="Payroll &amp; Attendance Processor" />
+                <HBox spacing="10">
+                    <Button onAction="#handleUpload" styleClass="primary-button" text="1. Load Attendance CSV" minWidth="-Infinity"/>
+                    <Button onAction="#handleGenerateIndividualPayslips" styleClass="primary-button" text="2. Generate Individual Payslips" minWidth="-Infinity"/>
+                    <Button onAction="#handleGenerateMasterSummary" styleClass="primary-button" text="3. Generate Master Summary" minWidth="-Infinity"/>
+                </HBox>
 
                 <Label fx:id="fileLabel" styleClass="file-label" text="No file selected" />
-                <Separator />
-                <Label styleClass="section-title" text="Validation &amp; Processing Results" />
-                <TextArea fx:id="outputArea" editable="false" prefHeight="250" styleClass="output-area" wrapText="true" />
 
+                <Separator />
+
+                <Label styleClass="section-title" text="Employee Records Management" />
+                <HBox spacing="10">
+                    <TextField fx:id="newName" promptText="Full Name" prefWidth="150"/>
+                    <TextField fx:id="newEmpId" promptText="Emp ID" prefWidth="70"/>
+                    <TextField fx:id="newRate" promptText="Hourly Rate" prefWidth="80"/>
+                    <Button onAction="#handleAddEmployee" styleClass="primary-button" text="Add Employee" minWidth="-Infinity"/>
+                </HBox>
+                <HBox spacing="10">
+                    <TextField fx:id="deleteEmpId" promptText="Emp ID to Delete" prefWidth="150" />
+                    <Button onAction="#handleDeleteEmployee" styleClass="primary-button" text="Delete Employee" style="-fx-background-color: #e74c3c;" minWidth="-Infinity"/>
+                </HBox>
+
+                <Separator />
+
+                <Label styleClass="section-title" text="System Console" />
+                <TextArea fx:id="outputArea" editable="false" prefHeight="200" styleClass="output-area" wrapText="true" />
             </VBox>
         </StackPane>
     </center>

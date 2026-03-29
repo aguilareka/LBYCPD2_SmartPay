@@ -109,23 +109,38 @@ public class AttendanceValidator {
             lastIn.flag("Missing TIME OUT");
         }
     }
-    public static double calculateTotalValidHours(List<AttendanceLog> employeeLogs) {
-        double totalHours = 0.0;
+    public static double[] calculateWorkHours(List<AttendanceLog> employeeLogs) {
+        double regularHours = 0.0;
+        double overtimeHours = 0.0;
+        double lateMinutes = 0.0;
+
         AttendanceLog lastIn = null;
+        AttendanceLog lastOtIn = null;
         employeeLogs.sort(Comparator.comparing(AttendanceLog::getTimestamp));
 
         for (AttendanceLog log : employeeLogs) {
             if (log.isFlagged()) continue;
 
-            if (log.getType().equals("IN") || log.getType().equals("OT-IN")) {
+            if (log.getType().equals("IN")) {
                 lastIn = log;
-
-            } else if ((log.getType().equals("OUT") || log.getType().equals("OT-OUT")) && lastIn != null) {
+                // Calculates Late Minutes (Assuming 08:00 AM Start)
+                java.time.LocalTime time = log.getTimestamp().toLocalTime();
+                java.time.LocalTime shiftStart = java.time.LocalTime.of(8, 0);
+                if (time.isAfter(shiftStart)) {
+                    lateMinutes += java.time.Duration.between(shiftStart, time).toMinutes();
+                }
+            } else if (log.getType().equals("OUT") && lastIn != null) {
                 java.time.Duration duration = java.time.Duration.between(lastIn.getTimestamp(), log.getTimestamp());
-                totalHours += duration.toMinutes() / 60.0;
+                regularHours += duration.toMinutes() / 60.0;
                 lastIn = null;
+            } else if (log.getType().equals("OT-IN")) {
+                lastOtIn = log;
+            } else if (log.getType().equals("OT-OUT") && lastOtIn != null) {
+                java.time.Duration duration = java.time.Duration.between(lastOtIn.getTimestamp(), log.getTimestamp());
+                overtimeHours += duration.toMinutes() / 60.0;
+                lastOtIn = null;
             }
         }
-        return totalHours;
+        return new double[]{regularHours, overtimeHours, lateMinutes};
     }
 }
